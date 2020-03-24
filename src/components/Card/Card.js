@@ -1,6 +1,6 @@
 import React from "react";
 import CardBtn from "./CardBtn";
-import "./style.css";
+import "./Card.css";
 
 function Card(props) {
   return (
@@ -13,12 +13,12 @@ function Card(props) {
       {!props.image && <i className="fa fa-spinner fa-spin" aria-hidden="true" />}
       <CardBtn
         style={{ opacity: props.image ? 1 : 0 }}
-        onClick={props.handleBtnClick}
+        onClick={props.handleClick}
         data-value="pass"
       />
       <CardBtn
         style={{ opacity: props.image ? 1 : 0 }}
-        onClick={props.handleBtnClick}
+        onClick={props.handleClick}
         data-value="pick"
       />
     </div>

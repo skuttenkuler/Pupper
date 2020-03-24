@@ -7,7 +7,7 @@ import Col from '../components/Col/Col';
 export default function About() {
     return (
         <div>
-            <Hero backgroundImage="https://i.imgur.com/qkdpN.jpg">
+            <Hero backgroundImage="https://ideastream-production.s3.amazonaws.com/uploads/2019/5/08/happy_pitbull_shutterstock.jpg?null">
                 <h1>Pupper</h1>
                 <h2>A home for all the Good Boys and Girls</h2>
             </Hero>
