@@ -3,6 +3,10 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Wrapper from './components/Wrapper/Wrapper'
 import Navbar from './components/Navbar/Navbar'
 import About from './pages/About';
+import Discover from './pages/Discover';
+import Search from './pages/Search';
+
+
 function App() {
   return (
    <Router>
