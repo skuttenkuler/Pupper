@@ -37,7 +37,7 @@ export default class Search extends Component {
   };
   render() {
     return (
-      <div>
+      <div className="search">
         <Container style={{ minHeight: "80%" }}>
           <h1 className="text-center">Search By Breed!</h1>
           <Alert

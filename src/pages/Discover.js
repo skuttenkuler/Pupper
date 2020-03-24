@@ -17,7 +17,7 @@ export default class Discover extends Component {
 
     handleClick = event => {
         //get the data-value 
-        const btnType = event.target.attributes.getNamedItem("data-values").value;
+        const btnType = event.target.attributes.getNamedItem("data-value").value;
 
         const newState = {...this.state };
 
@@ -50,7 +50,7 @@ export default class Discover extends Component {
 
     render() {
         return (
-            <div>
+            <div className="discover">
                 <h1 className="text-center">Find a Pup!</h1>
             <Card image={this.state.image} handleClick={this.handleClick}/>
             <h1 className="text-center">
