@@ -1,69 +1,97 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `yarn start`
-
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
 # Pupper
+
+A React application to find and match with the best good boys and girls.
+
+![Alt text](./src/assets/images/pupper.gif?raw=true "Preview")
+
+
+## Technologies Used
+
+* [React](https://reactjs.org/)
+* [React Router](https://reacttraining.com/react-router/web/guides/quick-start)
+* [Axios](https://github.com/axios/axios)
+
+## Code Snippets
+
+Methods to handle generate new dog after "swipe", randomize chance to match with liked dog and track number of matches .
+
+```JSX
+    
+     state = {
+        image: "",
+        match: false,
+        matchCount: 0
+    };
+
+    componentDidMount() {
+        this.nextDog();
+    }
+
+    handleClick = event => {
+        //get the data-value 
+        const btnType = event.target.attributes.getNamedItem("data-value").value;
+
+        const newState = {...this.state };
+
+        if (btnType === "pick") {
+            //have 1 in 5 chance to match
+            newState.match = 1 === Math.floor(Math.random() * 5) + 1;
+
+            // set newState
+            newState.matchCount = newState.match
+            ? newState.matchCount + 1
+            : newState.matchCount;
+        } else {
+            //if not liked
+            newState.match = false;
+        }
+        //replace state with newState then NextDog
+        this.setState(newState);
+        this.nextDog();
+    };
+
+    nextDog = () => {
+        API.getRandom()
+        .then(res => 
+            this.setState({
+                image: res.data.message
+            })
+        )
+        .catch(err => console.log(err));
+    };
+  ```
+
+Pupper dog card for Discover Page
+
+  ```JSX
+   <div
+      className="card"
+      style={{
+        backgroundImage: props.image ? `url(${props.image})` : "none"
+      }}
+    >
+      {!props.image && <i className="fa fa-spinner fa-spin" aria-hidden="true" />}
+      <CardBtn
+        style={{ opacity: props.image ? 1 : 0 }}
+        onClick={props.handleClick}
+        data-value="pass"
+      />
+      <CardBtn
+        style={{ opacity: props.image ? 1 : 0 }}
+        onClick={props.handleClick}
+        data-value="pick"
+      />
+    </div>
+  );
+}
+
+  ```
+
+# Author
+  * Sam Kuttenkuler
+    - [Github](https://www.github.com/skuttenkuler)
+    - [LinkedIn](https://www.linkedin.com/in/skdev91)
+
+# API
+
+[Dog API](https://dog.ceo/dog-api/)
